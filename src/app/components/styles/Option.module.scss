@@ -1,0 +1,27 @@
+
+
+.container{
+    
+   display: flex;
+   padding-bottom: 5px;
+   border-bottom: 2px solid white;
+   justify-content: space-between;
+   margin-bottom: 20px;
+
+   div{
+    display: flex;
+   }
+
+    .priceContainer{
+        p{
+            width: 10px;
+            margin-inline:10px ;
+           
+        }
+    }
+
+   button{
+    width: 25px;
+    height: 25px;
+   }
+}
