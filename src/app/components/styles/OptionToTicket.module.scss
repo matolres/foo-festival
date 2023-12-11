@@ -3,8 +3,42 @@
 .container{
    color:white;
    background-color: rgba($color: #711C91, $alpha: 1.0);
-   max-width: 1000px;
+   max-width: 1100px;
    margin-inline: auto;
    padding: 50px;
+
+   .headline{
+      text-align: center;
+   }
+   &>div{
+      margin-bottom: 60px;
+   }
+
+   button{
+      display: block;
+      margin-inline: auto;
+   }
    
+}
+
+.campContainer{
+  
+   &>div{ 
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2px solid white;
+      padding-bottom: 5px;
+      margin-bottom: 20px;
+
+      input{
+         margin-right: 30px;
+         width: 30px;
+      }
+      
+   }
+   
+}
+
+.error{
+   background-color: red;
 }
