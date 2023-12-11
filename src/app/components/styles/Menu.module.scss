@@ -1,0 +1,21 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    position: sticky;
+    
+
+    .logo{
+        height: 4rem;
+        width: 4rem;
+        background-color: aquamarine;
+        border-radius: 50%;
+
+    }
+    a {
+        color: aliceblue;
+        text-decoration: none;
+        list-style: none;
+    }
+
+}

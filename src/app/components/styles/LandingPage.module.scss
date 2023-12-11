@@ -1,0 +1,53 @@
+.section_container {
+    display: grid;
+    grid-template-rows: 0.75fr 0.25fr;
+    
+    height: 70vh;
+    
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+
+     h1 {
+        color: aliceblue;
+        font-size: 5rem;
+    }
+
+    p {
+        color: aliceblue;
+        font-size: 1.5rem;
+    }
+
+    .ticket_button {
+        text-decoration: none;
+        background-color: aliceblue;
+        border: none;
+        font-size: 1rem;
+        padding: 0.6rem 1.5rem;
+        margin-right: 0.5rem;
+    }
+
+    .artists_button {
+        text-decoration: none;
+        background-color: transparent;
+        backdrop-filter: blur(2px);
+        border: 2px solid white;
+        font-size: 1rem;
+        padding: 0.6rem 1.5rem;
+        margin-left: 0.5rem ;
+        color: white;
+    }
+
+    .Marquee {
+        background-color: rgba($color: #711C91, $alpha: 0.4);
+        color: aliceblue;
+        font-size: 2rem;
+    }
+
+}
+

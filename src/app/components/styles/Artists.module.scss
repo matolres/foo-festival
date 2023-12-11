@@ -1,0 +1,30 @@
+.main {
+
+    h1 {
+        color: aliceblue;
+        text-align: center;
+        font-size: 4rem;
+    }
+
+    .container {
+        margin: 4rem;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: repeat(6, 1fr);
+
+    .day1 {
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        color: aliceblue;
+        background-color: transparent;
+        backdrop-filter: blur(3px);
+        border: 2px solid white;
+        padding: 3rem;
+    }
+
+    .day1:nth-child(1){
+        grid-area: 1/1/2/4;
+
+    }
+}
+}
