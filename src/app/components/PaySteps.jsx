@@ -1,8 +1,8 @@
 "use client"
-import styles from './styles/PaySteps.module.scss'
+
 import { useState } from 'react';
 import OptionToTicket from "./OptionToTicket"
-
+import PaymentOptions from "./PaymentOptions"
 
 function PaySteps(){
 const [currentStep, setCurrentStep] = useState(0)
@@ -23,7 +23,7 @@ const steps =[
 {
     id:2,
     content:<div>
-        <p>Step 2</p>
+        <PaymentOptions/>
     </div>
 
 }
@@ -33,7 +33,8 @@ const steps =[
    
     return(
         <>
-        {steps[currentStep].content}
+        {/* {steps[currentStep].content} */}
+        {steps[1].content}
         
         </>
     )
