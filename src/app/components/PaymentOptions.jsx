@@ -1,8 +1,25 @@
 
 import styles from './styles/PaymentOptions.module.scss'
+import React from 'react';
 
-    function PaymentOptions(){
+import Countdown from 'react-countdown';
 
+
+ 
+  
+
+    function PaymentOptions(props){
+
+        const renderer = ({ minutes, seconds, completed }) => {
+            if (completed) {
+                props.setCurrentStep(0)
+              }
+              
+              return <span>{minutes}:{seconds}</span>;
+          };
+
+      
+     let subtotal = props.tickets*2397+props.twoPerTent*249+props.threePerTent*349;
     return(
         <>
         <div className={styles.container}>
@@ -37,11 +54,32 @@ import styles from './styles/PaymentOptions.module.scss'
     
         <div className={styles.prisContainer}>
             <p>Card summery</p>
-                <div>
-                    <p>Time to order:10:00</p>
+                <div> <p>Time to order:</p>
+                 <Countdown date={Date.now() + 9000 } renderer={renderer} >
+                    
+                </Countdown> 
                 </div>
-                <div>
-                    <p>Number of tickets:</p>
+                <div className={styles.prisElement}>
+                    <div>
+                        <p>Number of tickets:</p>
+                        <p><span>{props.tickets}x</span> Foo fest</p>
+                        <p>Regular ticket</p>
+
+                    </div>
+                    <div>
+                        <p>2-person tent: {props.twoPerTent}</p>
+                        <p>3-person tent: {props.threePerTent}</p>
+
+                    </div>
+                    <div>
+                        <p>Subtotal: {subtotal}kr.</p>
+                    </div>
+                    <div>
+                        <p>Booking fee 99kr.</p>
+                    </div>
+
+                    <p>Total: {subtotal+99}</p>
+                   
                 </div>
             
         </div>

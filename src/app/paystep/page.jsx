@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import OptionToTicket from '../components/OptionToTicket';
+import PaymentOptions from '../components/PaymentOptions';
 
 
 
@@ -11,6 +12,29 @@ const [currentStep, setCurrentStep] = useState(0)
 const [tickets, setTickets] = useState(1);
 const [twoPerTent, setTwoPerTent] = useState(0);
 const [threePerTent, setThreeoPerTent] = useState(0);
+
+
+
+
+
+
+
+    // let bodyContent = JSON.stringify({
+    //     "area":"Nilfheim",
+    //     "amount":200
+    //   });
+      
+
+     
+    //   fetch(process.env.NEXT_PUBLIC_URL + "reserve-spot", {
+    //     "method": "PUT",
+    //     "headers": {
+    //       "Content-Type": "application/json"
+    //     },
+    //     "body": bodyContent
+    //   })
+    //   .then(response => response.json())
+    //      .then(data => console.log(data));
 
 
 const steps =[
@@ -24,7 +48,7 @@ const steps =[
 {
     id:2,
     content:<div>
-        <p>Step 2</p>
+        <PaymentOptions threePerTent={threePerTent} twoPerTent={twoPerTent} tickets={tickets} setCurrentStep={setCurrentStep}/>
     </div>
 
 }

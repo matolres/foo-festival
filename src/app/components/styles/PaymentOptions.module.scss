@@ -28,11 +28,11 @@
 
 
     .prisContainer{
-        height: 300px;
+        
         &>p{
             border-bottom: 2px solid white;
         }
-        div:nth-child(2){
+       &>div:nth-child(2){
             margin-top: 20px;
             height: 40px;
             background-color: white;
@@ -40,9 +40,12 @@
         }
         div:nth-child(3){
             
-            height: 40px;
             background-color: #C396D3;
-            color: white
+            color: white;
+
+            div{
+                margin-top: 30px;
+            }
         }
        
     }
