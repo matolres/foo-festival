@@ -44,7 +44,7 @@ const checkErrorFun = (event)=>{
               if(result.message == "Reserved"){
                console.log(result);
                 props.setPostId(result.id);
-                props.setCurrentStep(1)
+                props.setCurrentStep(2)
               }
             } catch (error) {
               console.error('Fejl ved PUT-anmodning:', error);
@@ -91,7 +91,7 @@ return(
     <div className={styles.container}>
         <form className={styles.form} onSubmit={checkErrorFun}>
             <div>
-                    <Option name={"Regular Ticket"} price={2495} tickets={10}  setNumber={props.setTickets} number={props.tickets}/>    
+                    <Option name={props.ticketType} price={props.ticketPris} tickets={10}  setNumber={props.setTickets} number={props.tickets}/>    
             </div>
             
 
