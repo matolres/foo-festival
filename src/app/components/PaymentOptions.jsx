@@ -8,7 +8,8 @@ import Countdown from 'react-countdown';
 
     function PaymentOptions(props){
 
-      const [isClassAdded, setIsClassAdded] = useState(false);
+      const [isCardAdded, setIsCardAdded] = useState(false);
+      const [showButton, setShowButton] = useState(false);
 
       // laver en array ud af antallet af billetter
       const ticketNames = Array(props.tickets).fill('');
@@ -39,14 +40,15 @@ import Countdown from 'react-countdown';
             })
             
             console.log(updatedTicketData);
-            //sendInfo(event,updatedTicketData);
-            setIsClassAdded(true)
+            sendInfo(event,updatedTicketData);
             
-            console.log(isClassAdded);
+            
+            
            }
 
            function payticket(){
-
+            setIsCardAdded(true)
+            setShowButton(true);
            }
 
             async function sendInfo(event,updatedTicketData) {
@@ -118,16 +120,18 @@ import Countdown from 'react-countdown';
      let subtotal = props.tickets*2397+props.twoPerTent*249+props.threePerTent*349;
     return(
         <>
-        <div className={`${styles.paysection} ${isClassAdded ? styles.show : ''}`}>
-
-          <div >
-          <Creditcard/>
-          <button ></button>
-          </div>
-         </div>
+        
             
         
         <form className={styles.pay_info_form} onSubmit={sendPostRequest}>
+
+        <div className={`${styles.paysection} ${isCardAdded ? styles.show : ''}`}>
+
+<div >
+<Creditcard/>
+<button type="button" onClick={()=>{setIsCardAdded(false)}} > submit</button>
+</div>
+</div>
           
         <div className={styles.container}>
         <div>
@@ -200,21 +204,17 @@ import Countdown from 'react-countdown';
                     <div>
                         <p>Booking fee 99kr.</p>
                     </div>
-                    <div>
-                        <p>Total: {subtotal+99}</p>
-                    </div>
-                    <div >
-                  <label for="creditCard"> Credit card</label>
-                  
-                  <input id='creditCard'   type="radio"  name="pay" value="mobilepay"/> 
-            </div>
-            <div >
-              <label for="mobilpay"> Mobilpay</label>
-                  
-                  <input id='mobilpay'   type="radio"  name="pay" value="mobilepay" required/> 
-            </div>
-            <button>Place order</button>
+
+                    <p>Total: {subtotal+99}</p>
+
                    
+            
+                  
+                 
+            
+            <button onClick={payticket} type='button'>isert Card information</button>
+            {/* <button >Place order</button>    */}
+            <button className={ showButton ? styles.show : styles.hide}  >Place order</button>
                 </div>
             
         </div>

@@ -9,12 +9,18 @@
     transform: translate(-50%, 0);
     display: none;
 }
-.paysection.show{
+.show{
     display: block;
 }
 
 .pay_info_form {
     margin: 3rem 8rem;
+.hide{
+    display: none;
+}
+
+
+
 
     width: 100%;
 }
