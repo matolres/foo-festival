@@ -7,7 +7,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    margin: 3rem 8rem;
+    margin: 3rem 10rem;
     gap: 1.5rem;
 
     
@@ -24,6 +24,7 @@
     border-radius: 1rem;
     text-align: center;
     justify-content: space-between;
+    height: 28rem;
 
     h1 {
         font-size: 2rem;
@@ -60,16 +61,26 @@
 
     
 }
+@media only screen and (max-width: 1100px){
+    .section {
+        
+            display: grid;
+            grid-template-columns: 1fr;
+            margin: 3rem 4rem;
+        .ticket {
+            height: 22rem;
+
+        }
+}
+}
 
 @media only screen and (max-width: 680px){
 
     .main {
-        .section {
-            display: grid;
-            grid-template-columns: 1fr;
-            margin: 3rem 4rem;
+       
 
         .ticket {
+            height: 30rem;
             h1{
                 font-size: 1.5rem;
             }
@@ -77,7 +88,7 @@
                 font-size: 0.7rem;
             }
         }    
-    }
+
 
 
 }

@@ -87,17 +87,15 @@ const checkErrorFun = (event)=>{
     
 
 return(
-  
-    <>
      
     <div className={styles.container}>
-        <form onSubmit={checkErrorFun}>
+        <form className={styles.form} onSubmit={checkErrorFun}>
             <div>
                     <Option name={"Regular Ticket"} price={2495} tickets={10}  setNumber={props.setTickets} number={props.tickets}/>    
             </div>
             
 
-            <div>
+            <div className={styles.tent_container}>
                     <p className={styles.headline}>Choose Tent(s)</p>
                     <Option name={"2 Person tent"} price={249} maxTent={maxTent} tickets={props.tickets} setNumber={props.setTwoPerTent}  number={props.twoPerTent}/>
                     <Option name={"3 Person tent"} price={349} maxTent={maxTent} tickets={props.tickets}  setNumber={props.setThreeoPerTent}  number={props.threePerTent}/>
@@ -113,7 +111,7 @@ return(
                         data.map((single, any)=>(
                             <div data-number={any} key={single.area}>
                                 <label for={single.area} >{single.area} <span>{" - available spots: "+single.available}</span> </label>
-                                <input data-available={single.available}  type="radio" id={single.area} name="camp" value={single.area}/>
+                                <input className={styles.radioButton} data-available={single.available}  type="radio" id={single.area} name="camp" value={single.area}/>
                             </div>
                         )):"Loading camps"
                     }
@@ -122,12 +120,12 @@ return(
 
             </div>
             <p className={styles.error}>{errorDescription}</p>
-            <button >Gem valg</button>
+            <button className={styles.valg}>Gem valg</button>
         </form>
     </div>
     
     
-    </>
+
 )
 
 }
