@@ -1,4 +1,22 @@
 
+.paysection{
+    
+    width: 50%;
+    height: 700px;
+    background-color: hotpink;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: none;
+}
+.paysection.show{
+    display: block;
+}
+
+
+
+
+
 .container{
     max-width: 1100px;
     margin-inline: auto;

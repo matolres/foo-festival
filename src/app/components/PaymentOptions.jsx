@@ -1,11 +1,14 @@
 
 import styles from './styles/PaymentOptions.module.scss'
 import React from 'react';
-
+import Creditcard from '../components/CreditCard';
+import { useState } from 'react';
 import Countdown from 'react-countdown';
 
 
     function PaymentOptions(props){
+
+      const [isClassAdded, setIsClassAdded] = useState(false);
 
       // laver en array ud af antallet af billetter
       const ticketNames = Array(props.tickets).fill('');
@@ -36,7 +39,13 @@ import Countdown from 'react-countdown';
             })
             
             console.log(updatedTicketData);
-            sendInfo(event,updatedTicketData);
+            //sendInfo(event,updatedTicketData);
+            setIsClassAdded(true)
+            
+            console.log(isClassAdded);
+           }
+
+           function payticket(){
 
            }
 
@@ -109,7 +118,17 @@ import Countdown from 'react-countdown';
      let subtotal = props.tickets*2397+props.twoPerTent*249+props.threePerTent*349;
     return(
         <>
+        <div className={`${styles.paysection} ${isClassAdded ? styles.show : ''}`}>
+
+          <div >
+          <Creditcard/>
+          <button onClick={}></button>
+          </div>
+         </div>
+            
+        
         <form onSubmit={sendPostRequest}>
+          
         <div className={styles.container}>
         <div>
         <p>Contact info</p>
@@ -117,21 +136,21 @@ import Countdown from 'react-countdown';
         
             <div>
               
-                <input type="text" id="fname" name="fname" placeholder='Firstname' required/>
-                <input type="text" id="lname" name="lname" placeholder='Lastname' required/>
+                <input type="text" id="fname" name="fname" placeholder='Firstname' />
+                <input type="text" id="lname" name="lname" placeholder='Lastname' />
             </div>
             <div>
-                <input type="text" id="adress" name="adress" placeholder='Adress' required/>
+                <input type="text" id="adress" name="adress" placeholder='Adress' />
             </div>
             <div>
-                <input type="text" id="Country" name="country" placeholder='Country' required/>
-                <input type="text" id="city" name="city" placeholder='City' required/>
+                <input type="text" id="Country" name="country" placeholder='Country' />
+                <input type="text" id="city" name="city" placeholder='City' />
             </div>
             <div>
-                <input type="email" id="email" name="email" placeholder='Email' required/>
+                <input type="email" id="email" name="email" placeholder='Email' />
             </div>
             <div>
-                <input type="tel" id="tel" name="tel" placeholder='Phone number' required/>
+                <input type="tel" id="tel" name="tel" placeholder='Phone number' />
             </div>
             <br />
             <hr />
@@ -143,7 +162,7 @@ import Countdown from 'react-countdown';
                 <input name={`ticket${index + 1}`}
                   type="text"
                 placeholder='Name'
-                required
+                
                 />
 
               </div>
