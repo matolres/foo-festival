@@ -1,9 +1,10 @@
 
 .container{
-    max-width: 1100px;
+    width: 100%;
     margin-inline: auto;
     background-color: rgba($color: #711C91, $alpha: 1.0);
     display: flex;
+    
     gap: 50px;
 
     & > div{

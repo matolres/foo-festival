@@ -11,10 +11,10 @@ function Option(props){
 
         
         <div className={styles.priceContainer}>
-        <button type='button' onClick={()=> props.tickets <= props.maxTent || props.number>=10?"":props.setNumber((old) => old+1)}>+</button>
+        <button className={styles.button_plus_minus} type='button' onClick={()=> props.tickets <= props.maxTent || props.number>=10?"":props.setNumber((old) => old+1)}>+</button>
                                                    
         <p>{props.number}</p>
-        <button type='button' onClick={()=>props.number>0?props.setNumber(old => old-1):""}>-</button>
+        <button className={styles.button_plus_minus} type='button' onClick={()=>props.number>0?props.setNumber(old => old-1):""}>-</button>
         </div>
          
         

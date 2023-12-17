@@ -14,15 +14,35 @@
    }
 
     .priceContainer{
+        width: 100px;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        justify-content: space-between;
         p{
-            width: 10px;
-            margin-inline:10px ;
+            text-align: center;
            
         }
     }
 
-   button{
+    .button_plus_minus{
     width: 25px;
     height: 25px;
+    text-decoration: none;
+    background: none;
+    border: 2px solid aliceblue;
+    color: aliceblue;
+    border-radius: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.1s ease-in-out;
+   }
+
+   .button_plus_minus:hover {
+    color: aliceblue;
+    border: 3px solid aliceblue;
+    text-shadow: 0 0 2px aliceblue, 0 0 4px aliceblue, 0 0 10px aliceblue;
+    box-shadow: 0 0 2px aliceblue, 0 0 4px aliceblue, 0 0 10px aliceblue;
+
    }
 }

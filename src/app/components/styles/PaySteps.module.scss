@@ -1,3 +1,29 @@
+.main {
+    .image {
+        z-index: -10;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        overflow-x: hidden; 
+        
+    }
+    .section {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .optiontoticket {
+        
+        display: flex;
+    }
+    .paymentoption {
+        margin: 2rem;
+        display: flex;
+    }
+}
+
+
 $color-primary: #e21cc4;	
 
 .container{
@@ -8,4 +34,14 @@ $color-primary: #e21cc4;
         color: red;
     }
     
+}
+
+@media only screen and (max-width: 680px) {
+    .image {
+        z-index: -10;
+
+        height: 100%;
+        width: 100%; 
+        
+    }
 }

@@ -15,6 +15,10 @@
         border-radius: 50%;
 
     }
+
+    ul {
+        text-align: end;
+    }
     a {
         color: aliceblue;
         text-decoration: none;
@@ -78,8 +82,10 @@
 
         ul {
             padding-top: 8rem;
-            
             line-height: 6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
         li{
             font-size: 2rem;
             text-align: center;
