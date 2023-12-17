@@ -16,16 +16,16 @@ let linesMesh;
 let targetX = 0;
 let targetY = 0;
 
-const maxParticleCount = 500;
+const maxParticleCount = 350;
 let particleCount = 350;
-const r = 550;
+const r = 450;
 const rLong = 800;
 const rHalf = r / 2;
 
 const effectController = {
   showLines: true,
-  minDistance: 150,
-  maxConnections: 10,
+  minDistance: 130,
+  maxConnections: 5,
 };
 
 useEffect(() => {
@@ -88,9 +88,9 @@ function init() {
     // add it to the geometry
     particlesData.push({
       velocity: new THREE.Vector3(
-        -1 + Math.random() * 1,
-        -1 + Math.random() * 1,
-        -1 + Math.random() * 1
+        -0.5 + Math.random() * 0.5,
+        -0.5 + Math.random() * 0.5,
+        -0.5 + Math.random() * 0.5 
       ),
       numConnections: 0,
     });
@@ -243,14 +243,14 @@ function onWindowResize() {
 }
 
 function handleMouseMove(event) {
-  targetX = event.clientX * 0.0015;
-  targetY = event.clientY * 0.0015;
+  targetX = event.clientX * 0.0010;
+  targetY = event.clientY * 0.0010;
 }
 
 function render() {
   // Use lerp to smoothly transition from the current rotation to the target rotation
-  group.rotation.y += (targetX - group.rotation.y) * 0.025;
-  group.rotation.x += (targetY - group.rotation.x) * 0.025;
+  group.rotation.y += (targetX - group.rotation.y) * 0.020;
+  group.rotation.x += (targetY - group.rotation.x) * 0.020;
 
   renderer.setSize(window.innerWidth, window.innerHeight);
 

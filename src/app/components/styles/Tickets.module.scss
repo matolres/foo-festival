@@ -1,0 +1,86 @@
+.main{
+    overflow-x: hidden;
+    height: 100%;
+    text-align: center;
+    }
+.section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    margin: 3rem 8rem;
+    gap: 1.5rem;
+
+    
+
+    .ticket {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        color: aliceblue;
+        background-color: rgba($color: #711C91, $alpha: 0.2);
+    backdrop-filter: blur(2px);
+    border: 1px solid white;
+    padding: 3rem;
+    border-radius: 1rem;
+    text-align: center;
+    justify-content: space-between;
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .price {
+        h1 {
+            font-size: 3rem;
+        }
+    }
+
+    .buy_button {
+        align-self: center;
+        text-decoration: none;
+        background-color: aliceblue;
+        border: none;
+        border-radius: 0.7rem;
+        font-size: 1rem;
+        padding: 0.6rem 1.5rem;
+        transition: 0.1s ease-in;
+        cursor: pointer;
+    }
+
+    .buy_button:hover {
+        box-shadow:
+        0 0 2px #fff,
+        0 0 5px #fff,
+        0 0 13px #711C91,
+        0 0 17px #711C91,;
+
+    }
+
+    }
+
+    
+}
+
+@media only screen and (max-width: 680px){
+
+    .main {
+        .section {
+            display: grid;
+            grid-template-columns: 1fr;
+            margin: 3rem 4rem;
+
+        .ticket {
+            h1{
+                font-size: 1.5rem;
+            }
+            p {
+                font-size: 0.7rem;
+            }
+        }    
+    }
+
+
+}
+}
+    
+

@@ -1,8 +1,11 @@
 .nav {
+    top: 0;
     display: flex;
     justify-content: space-between;
     padding: 2rem;
     position: sticky;
+    z-index: 10000;
+    
     
 
     .logo{
@@ -16,6 +19,76 @@
         color: aliceblue;
         text-decoration: none;
         list-style: none;
+        transition: 0.1s ease-in-out;
     }
 
+    a:hover {
+        text-shadow: 0 0 2px #0abdc6, 0 0 4px #0abdc6, 0 0 10px #0abdc6;
+    }
+
+    .toggle_button {
+        display: none;
+    }
+
+    @media only screen and (max-width: 680px){
+        .nav {
+            position: relative;
+        }
+        .menu {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(to right, rgba(17, 0, 34, 0.8) 0 30%, rgba(0, 75, 79, 0.8));
+            backdrop-filter: blur(3px);
+            z-index: 2;
+            transform: translateX(100%);
+            transition: transform 0.5s ease-in-out;
+            
+          
+        }
+    
+        .toggle_button {
+            display: block;
+            position: absolute;
+            margin-top: 1rem;
+            margin-right: 2rem;
+            right: 0;
+            border: none;
+            text-decoration: none;
+            background: none;
+            z-index: 10000;
+
+        }
+    
+        .active {
+            transform: translateX(0);
+            transition: transform 0.5s ease-in-out;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(to right, rgba(17, 0, 34, 0.8) 0 30%, rgba(0, 75, 79, 0.8));
+            backdrop-filter: blur(3px);
+            z-index: 2;
+        
+        }
+
+        ul {
+            padding-top: 8rem;
+            
+            line-height: 6rem;
+        li{
+            font-size: 2rem;
+            text-align: center;
+
+
+        }
+    }
+        
+    }
+
+    
 }

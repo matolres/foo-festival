@@ -1,0 +1,56 @@
+.glitch {
+    color: aliceblue;
+    text-align: center;
+    font-size: 5rem;
+      text-shadow: 0 0 2px #0abdc6, 0 0 4px #0abdc6, 0 0 10px #0abdc6;
+      display: inline-block;
+      position: relative;
+
+    }
+    
+    @keyframes noise-anim{
+      $steps:20;
+      $duration: 0.5s; // Total duration of the animation
+      $delay-between-steps: 5s;
+      @for $i from 0 through $steps{
+         $delay: $i * $delay-between-steps;
+        #{percentage($i*(1/$steps))}{
+          clip:rect(random(100)+px,9999px,random(100)+px,0);
+          animation: noise-anim-2 #{$duration} infinite linear alternate-reverse $delay;
+        }
+      }
+    }
+    
+    
+    @keyframes noise-anim-2{
+      $steps:20;
+      $duration: 3s; // Total duration of the animation
+      $delay-between-steps: 5s;
+      @for $i from 0 through $steps{
+        $delay: $i * $delay-between-steps;
+        #{percentage($i*(1/$steps))}{
+          clip:rect(random(100)+px,9999px,random(100)+px,0);
+          animation: noise-anim-2 #{$duration} infinite linear alternate-reverse $delay;
+        }
+      }
+    }
+    .glitch:before{
+      content:attr(data-text);
+      position:absolute;
+      left:-2px;
+      text-shadow: 0 0 4px #0abdc6; 
+      top:0;
+      color: aliceblue;
+      background:transparent;
+      overflow:hidden;
+      clip:rect(0,900px,0,0); 
+      animation:noise-anim-2 4s infinite linear alternate-reverse;
+      animation-delay: 1s;
+    }
+
+    @media only screen and (max-width: 680px){
+        .glitch {
+            font-size: 2.5rem;
+          }
+      
+    }
