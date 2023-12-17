@@ -1,4 +1,4 @@
-
+import { useState } from 'react';
 import styles from './styles/PaymentOptions.module.scss'
 import React from 'react';
 
@@ -9,7 +9,7 @@ import Countdown from 'react-countdown';
   
 
     function PaymentOptions(props){
-
+      const [ticketNames, setTicketNames] = useState(Array(props.tickets).fill(''));
         const renderer = ({ minutes, seconds, completed }) => {
             if (completed) {
                 props.setCurrentStep(0)
@@ -18,22 +18,25 @@ import Countdown from 'react-countdown';
               return <span>{minutes}:{seconds}</span>;
           };
 
+
+
+
+
            function sendPostRequest(event){
             event.preventDefault();
-            // console.log(props.postId);
-            // fetch(`${process.env.NEXT_PUBLIC_URL}fullfill-reservation`, {
-            //     method: "POST",
-            //     headers: {
-            //       "Content-Type": "application/json"
-            //     },
-            //     body: JSON.stringify({
-            //         id: props.postId,
-            //       }),
-            //   })
-            //     .then(response => console.log(response))
-            //     .catch(err => console.error(err));
-            //reserveSpot();
-            sendInfo();
+            const updatedTicketData = {};
+
+           
+            ticketNames.forEach((e,i)=>{
+              console.log(event.target.elements[`ticket${i + 1}`].value);
+              updatedTicketData[`billet-${i + 1}`] = event.target.elements[`ticket${i + 1}`].value;
+            })
+            
+            console.log(updatedTicketData);
+
+
+            
+            sendInfo(event,updatedTicketData);
            }
 
             async function reserveSpot(){
@@ -63,45 +66,10 @@ import Countdown from 'react-countdown';
                 }
               };
 
-              // -- 
-            //   async function sendInfo(){
-            //     console.log("sendInfo");
-            //     // try {
-            //       const response = await fetch(`https://bzhijbeuftyjosmsqsba.supabase.co/rest/v1/foo-table`, {
-            //         method: 'POST',
-            //         headers: {
-            //          apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ6aGlqYmV1ZnR5am9zbXNxc2JhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDI3NDUwMTUsImV4cCI6MjAxODMyMTAxNX0.0RS_C54MUy2Wc2uyLOVWqbsPYljdCI1xF8xEihsWfJg",
-            //           'Content-Type': 'application/json',
-            //         },
-            //         body: JSON.stringify({
-            //             first_name: "casper",
-            //             last_name: "bisgaard",
-            //             address:"sdf",
-            //             country:"sdfdsf",
-            //             city:"sdfdsf",
-            //             email:"sdfsdf",
-            //             phone:28228,
-            //             ticketsName:{}
-            //         }),
-            //       });
-          
-            //       if (!response.ok) {
-            //         throw new Error('Network response was not ok');
-            //       }
-
-            //     let result = await response.text();
-            //     console.log(result);
-          
-                  
-            //     // } catch (error) {
-            //     //   console.error('Fejl ved POST-anmodning:', error);
-            //     //   console.log(result);
-                  
-            //     // }
-            //   };
-            async function sendInfo() {
-                console.log("sendInfo");
-               // try {
+              
+            async function sendInfo(event,updatedTicketData) {
+                
+                
                   const response = await fetch(`https://bzhijbeuftyjosmsqsba.supabase.co/rest/v1/foo-table`, {
                     method: 'POST',
                     headers: {
@@ -110,14 +78,14 @@ import Countdown from 'react-countdown';
                       "Prefer": "return=minimal",
                     },
                     body: JSON.stringify({
-                      first_name: "nu",
-                      last_name: "bisgaard",
-                      address: "sdf",
-                      country: "sdfdsf",
-                      city: "sdfdsf",
-                      email: "sdfsdf",
-                      phone: 28228,
-                      ticketsName: {}
+                      first_name: event.target.elements.fname.value,
+                       last_name: event.target.elements.lname.value,
+                       address: event.target.elements.adress.value,
+                       country: event.target.elements.country.value,
+                       city: event.target.elements.city.value,
+                       email: event.target.elements.email.value,
+                       phone: event.target.elements.tel.value?event.target.elements.tel.value:0,
+                      ticketsName: updatedTicketData,
                     }),
                   });
                   console.log(response);
@@ -128,7 +96,7 @@ import Countdown from 'react-countdown';
                   }
               
               };
-
+            
 
               
           
@@ -137,30 +105,49 @@ import Countdown from 'react-countdown';
      let subtotal = props.tickets*2397+props.twoPerTent*249+props.threePerTent*349;
     return(
         <>
+        <form onSubmit={sendPostRequest}>
         <div className={styles.container}>
         <div>
         <p>Contact info</p>
-         <form onSubmit={sendPostRequest}> 
+        <div className={styles.inputsection}>
+         {/*   */}
             <div>
-                <input type="text" id="fname" name="fname" placeholder='Firstname'required/>
-                <input type="text" id="lname" name="lname" placeholder='Lastname'/>
+              
+                <input type="text" id="fname" name="fname" placeholder='Firstname' required/>
+                <input type="text" id="lname" name="lname" placeholder='Lastname' required/>
             </div>
             <div>
-                <input type="text" id="adresse" name="adresse" placeholder='Adresse'/>
+                <input type="text" id="adress" name="adress" placeholder='Adress' required/>
             </div>
             <div>
-                <input type="text" id="Country" name="Country" placeholder='Country'/>
-                <input type="text" id="city" name="city" placeholder='City'/>
+                <input type="text" id="Country" name="country" placeholder='Country' required/>
+                <input type="text" id="city" name="city" placeholder='City' required/>
             </div>
             <div>
-                <input type="email" id="email" name="email" placeholder='Email'/>
+                <input type="email" id="email" name="email" placeholder='Email' required/>
             </div>
             <div>
-                <input type="tel" id="tel" name="tel" placeholder='Phone number' />
+                <input type="tel" id="tel" name="tel" placeholder='Phone number' required/>
             </div>
+            <br />
+            <hr />
+
+            {ticketNames.map((ticketName, index) => (
+              <div key={index}>
+                <label>{`billet ${index + 1}:`}</label>
+                <input name={`ticket${index + 1}`}
+                  type="text"
+                placeholder='Name'
+                required
+                />
+
+              </div>
+            ))}
+
+              
            
-            <button>click</button>
-     </form> 
+            </div>
+            {/* </form>  */}
 
         </div>
     
@@ -191,11 +178,24 @@ import Countdown from 'react-countdown';
                     </div>
 
                     <p>Total: {subtotal+99}</p>
+
+                    <div >
+                  <label for="creditCard"> Credit card</label>
+                  
+                  <input id='creditCard'   type="radio"  name="pay" value="mobilepay"/> 
+            </div>
+            <div >
+              <label for="mobilpay"> Mobilpay</label>
+                  
+                  <input id='mobilpay'   type="radio"  name="pay" value="mobilepay" required/> 
+            </div>
+            <button>Place order</button>
                    
                 </div>
             
         </div>
         </div>
+        </form>
         
         </>
     )
