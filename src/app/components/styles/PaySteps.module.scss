@@ -37,6 +37,19 @@ $color-primary: #e21cc4;
 }
 
 @media only screen and (max-width: 680px) {
+    
+    .main{
+
+        p {
+            font-size: 0.8rem;
+        }
+    .paymentoption {
+        margin: 2rem 0.5rem;
+
+        
+
+    }
+    
     .image {
         z-index: -10;
 
@@ -44,4 +57,5 @@ $color-primary: #e21cc4;
         width: 100%; 
         
     }
+}   
 }

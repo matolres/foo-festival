@@ -48,7 +48,7 @@ const checkErrorFun = (event)=>{
               }
             } catch (error) {
               console.error('Fejl ved PUT-anmodning:', error);
-              setErrorDescription("error try agian later");
+              setErrorDescription("error try again later");
             }
           };
           reserveSpot();

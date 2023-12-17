@@ -134,7 +134,7 @@ import Countdown from 'react-countdown';
 </div>
           
         <div className={styles.container}>
-        <div>
+        <div className={styles.under_container}>
         <p>Contact info</p>
         <div className={styles.inputsection}>
         
@@ -198,14 +198,14 @@ import Countdown from 'react-countdown';
                         <p>3-person tent: {props.threePerTent}</p>
 
                     </div>
-                    <div>
+                    <div >
                         <p>Subtotal: {subtotal}kr.</p>
                     </div>
                     <div>
                         <p>Booking fee 99kr.</p>
                     </div>
 
-                    <p>Total: {subtotal+99}</p>
+                    <p className={styles.Total}>Total: {subtotal+99}</p>
 
                    
             

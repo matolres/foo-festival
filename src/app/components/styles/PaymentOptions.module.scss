@@ -1,7 +1,7 @@
 
 .paysection{
     
-    width: 50%;
+    
     height: 700px;
     background-color: hotpink;
     position: absolute;
@@ -114,10 +114,37 @@
                 justify-content: center;
             }
         }
-
         
        
     }
+    .total {
+        font-size: 1.5rem;
+        font-weight: 900;
+    }
+
     
-    
+}
+
+@media only screen and (max-width: 1100px){
+
+    .pay_info_form {
+        margin: 3rem 4rem;
+    }
+    .container {
+        flex-direction: column;
+        .under_container {
+            width: 100%;
+        }
+
+        .prisContainer {
+            width: 100%;
+        }
+    }
+}
+
+@media only screen and (max-width: 680px){
+    .pay_info_form {
+        margin: 3rem 0.1rem;
+    }
+
 }
