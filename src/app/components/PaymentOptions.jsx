@@ -1,15 +1,16 @@
-import { useState } from 'react';
+
 import styles from './styles/PaymentOptions.module.scss'
 import React from 'react';
 
 import Countdown from 'react-countdown';
 
 
- 
-  
-
     function PaymentOptions(props){
-      const [ticketNames, setTicketNames] = useState(Array(props.tickets).fill(''));
+
+      // laver en array ud af antallet af billetter
+      const ticketNames = Array(props.tickets).fill('');
+
+        //the countdownfunction 
         const renderer = ({ minutes, seconds, completed }) => {
             if (completed) {
                 props.setCurrentStep(0)
@@ -21,52 +22,24 @@ import Countdown from 'react-countdown';
 
 
 
-
+          // når onSubmit aktiveres 
            function sendPostRequest(event){
             event.preventDefault();
+
+            //tomt object er det som skal sendes med så vi har navnene på billeter 
             const updatedTicketData = {};
 
-           
+           //   
             ticketNames.forEach((e,i)=>{
               console.log(event.target.elements[`ticket${i + 1}`].value);
               updatedTicketData[`billet-${i + 1}`] = event.target.elements[`ticket${i + 1}`].value;
             })
             
             console.log(updatedTicketData);
-
-
-            
             sendInfo(event,updatedTicketData);
+
            }
 
-            async function reserveSpot(){
-                console.log("kør");
-                try {
-                  const response = await fetch(`${process.env.NEXT_PUBLIC_URL}fullfill-reservation`, {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        id: props.postId,
-                    }),
-                  });
-          
-                  if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                  }
-
-                const result = await response.json();
-                console.log(result);
-          
-                  
-                } catch (error) {
-                  console.error('Fejl ved POST-anmodning:', error);
-                  
-                }
-              };
-
-              
             async function sendInfo(event,updatedTicketData) {
                 
                 
@@ -93,8 +66,39 @@ import Countdown from 'react-countdown';
               
                   if (!response.ok) {
                     throw new Error('Network response was not ok');
+                  }else{
+                    reserveSpot();
                   }
               
+              };
+
+
+              
+              async function reserveSpot(){
+                console.log("kør");
+                try {
+                  const response = await fetch(`${process.env.NEXT_PUBLIC_URL}fullfill-reservation`, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        id: props.postId,
+                    }),
+                  });
+          
+                  if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                  }
+
+                const result = await response.json();
+                console.log(result);
+          
+                  
+                } catch (error) {
+                  console.error('Fejl ved POST-anmodning:', error);
+                  
+                }
               };
             
 
@@ -110,7 +114,7 @@ import Countdown from 'react-countdown';
         <div>
         <p>Contact info</p>
         <div className={styles.inputsection}>
-         {/*   */}
+        
             <div>
               
                 <input type="text" id="fname" name="fname" placeholder='Firstname' required/>
@@ -132,6 +136,7 @@ import Countdown from 'react-countdown';
             <br />
             <hr />
 
+            {/* laver ligså mange input som der er billetter  */}
             {ticketNames.map((ticketName, index) => (
               <div key={index}>
                 <label>{`billet ${index + 1}:`}</label>
@@ -147,14 +152,14 @@ import Countdown from 'react-countdown';
               
            
             </div>
-            {/* </form>  */}
+            
 
         </div>
     
         <div className={styles.prisContainer}>
             <p>Card summery</p>
                 <div> <p>Time to order:</p>
-                 <Countdown date={Date.now() + 300000 } renderer={renderer} >
+                 <Countdown date={Date.now() + 900000 } renderer={renderer} >
                     
                 </Countdown> 
                 </div>
