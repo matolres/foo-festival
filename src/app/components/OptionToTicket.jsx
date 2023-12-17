@@ -4,34 +4,55 @@ import Option from "./Option";
 
 function OptionToTicket(props){
    
-    const [errorTent, setErrorTent] = useState(false)
-    const [errorCamp, setErrorCamp] = useState(false)
-    const [errorSpots, setErrorSpots]= useState(false)
-
+    const [errorDescription, setErrorDescription] = useState("")
     const [data, setData] = useState(null);
    
     let maxTent = props.twoPerTent+props.threePerTent;
-const checkErrorFun = ()=>{
-    // event.preventDefault();
-    
-
+const checkErrorFun = (event)=>{
+    event.preventDefault();
     let camp = document.querySelector('input[type=radio][name=camp]:checked');
-    //console.log(props.tickets > camp.getAttribute('data-available'));
-    //console.log(maxTent>props.tickets)
+    
     if(maxTent>props.tickets){
-        setErrorTent(true);
-        setErrorCamp(false)
-        setErrorSpots(false);
+       setErrorDescription("You can't buy more tents than tickets")
     } else if (!camp) {
-        setErrorTent(false);
-        setErrorCamp(true)
-        setErrorSpots(false);
+        setErrorDescription("You need to choose a camp")
     }else if(props.tickets > camp.getAttribute('data-available')){
-        setErrorSpots(true);
-        setErrorTent(false);
-        setErrorCamp(false)
+        setErrorDescription("spot is shit")
     }else{
-        props.setCurrentStep(1)
+        props.setCamp(camp.value);
+
+       // const reserveSpot = async () => {
+        async function reserveSpot(){
+            try {
+              const response = await fetch(`${process.env.NEXT_PUBLIC_URL}reserve-spot`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  area: camp.value,
+                  amount: props.tickets,
+                }),
+              });
+      
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+      
+              const result = await response.json();
+              console.log('Data blev opdateret:', result.id);
+              if(result.message == "Reserved"){
+               console.log(result);
+                props.setPostId(result.id);
+                props.setCurrentStep(1)
+              }
+            } catch (error) {
+              console.error('Fejl ved PUT-anmodning:', error);
+              setErrorDescription("error try agian later");
+            }
+          };
+          reserveSpot();
+        
     }
 }
 
@@ -63,29 +84,14 @@ const checkErrorFun = ()=>{
       fetchData();
     }, []); // Tomt array som dependency for at sikre, at useEffect kun kører ved mount
   
-    // Nu kan du bruge data variablen i din komponent
-    const handleUpdate = async (id) => {
-    fetch(process.env.NEXT_PUBLIC_URL +'reserve-spot', {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: {
-          "area": "Alfheim",
-          "amount": 2
-        }
-      })
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
-    }
-    handleUpdate();
+    
 
 return(
   
     <>
      
     <div className={styles.container}>
-        
+        <form onSubmit={checkErrorFun}>
             <div>
                     <Option name={"Regular Ticket"} price={2495} tickets={10}  setNumber={props.setTickets} number={props.tickets}/>    
             </div>
@@ -115,12 +121,9 @@ return(
                     
 
             </div>
-            <p className={styles.error}>{errorTent?"-You can't buy more tents than tickets-":""}</p>
-            <p className={styles.error}>{errorCamp?"-You need to choose a camp-":""}</p>
-            <p className={styles.error}>{errorSpots?"spot is shit":""}</p>   
-
-            <button onClick={checkErrorFun}>Gem valg</button>
-        
+            <p className={styles.error}>{errorDescription}</p>
+            <button >Gem valg</button>
+        </form>
     </div>
     
     

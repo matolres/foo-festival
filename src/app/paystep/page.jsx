@@ -12,6 +12,8 @@ const [currentStep, setCurrentStep] = useState(0)
 const [tickets, setTickets] = useState(1);
 const [twoPerTent, setTwoPerTent] = useState(0);
 const [threePerTent, setThreeoPerTent] = useState(0);
+const [camp, setCamp]=useState("");
+const [postId, setPostId] = useState(1);
 
 
 
@@ -41,14 +43,14 @@ const steps =[
 {
     id:1,
     content:<div>
-       <OptionToTicket threePerTent={threePerTent} setThreeoPerTent={setThreeoPerTent}  setTwoPerTent={setTwoPerTent} twoPerTent={twoPerTent} tickets={tickets} setTickets={setTickets} setCurrentStep={setCurrentStep}/>
+       <OptionToTicket setPostId={setPostId} setCamp={setCamp} threePerTent={threePerTent} setThreeoPerTent={setThreeoPerTent}  setTwoPerTent={setTwoPerTent} twoPerTent={twoPerTent} tickets={tickets} setTickets={setTickets} setCurrentStep={setCurrentStep}/>
         
     </div>
 },
 {
     id:2,
     content:<div>
-        <PaymentOptions threePerTent={threePerTent} twoPerTent={twoPerTent} tickets={tickets} setCurrentStep={setCurrentStep}/>
+        <PaymentOptions postId={postId} threePerTent={threePerTent} twoPerTent={twoPerTent} tickets={tickets} setCurrentStep={setCurrentStep}/>
     </div>
 
 }
