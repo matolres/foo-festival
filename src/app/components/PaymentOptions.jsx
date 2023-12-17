@@ -127,7 +127,7 @@ import Countdown from 'react-countdown';
          </div>
             
         
-        <form onSubmit={sendPostRequest}>
+        <form className={styles.pay_info_form} onSubmit={sendPostRequest}>
           
         <div className={styles.container}>
         <div>
@@ -177,7 +177,7 @@ import Countdown from 'react-countdown';
     
         <div className={styles.prisContainer}>
             <p>Card summery</p>
-                <div> <p>Time to order:</p>
+                <div className={styles.count}> <p>Time to order:</p>
                  <Countdown date={Date.now() + 900000 } renderer={renderer} >
                     
                 </Countdown> 
@@ -200,9 +200,9 @@ import Countdown from 'react-countdown';
                     <div>
                         <p>Booking fee 99kr.</p>
                     </div>
-
-                    <p>Total: {subtotal+99}</p>
-
+                    <div>
+                        <p>Total: {subtotal+99}</p>
+                    </div>
                     <div >
                   <label for="creditCard"> Credit card</label>
                   
