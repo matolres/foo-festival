@@ -1,3 +1,7 @@
+
+.main{
+  height: 100vh;
+}
 .section_container {
     display: grid;
     grid-template-rows: 0.75fr 0.25fr;
@@ -9,15 +13,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
 
-     h1 {
-        color: aliceblue;
-        font-size: 5rem;
-    }
 
+     
     p {
         color: aliceblue;
         font-size: 1.5rem;
@@ -27,9 +28,22 @@
         text-decoration: none;
         background-color: aliceblue;
         border: none;
-        font-size: 1rem;
+        border-radius: 0.7rem;
+        font-size: 1.5rem;
         padding: 0.6rem 1.5rem;
         margin-right: 0.5rem;
+        transition: 0.1s ease-in-out;
+        color: #711C91;
+        cursor: pointer;
+    }
+
+    .ticket_button:hover {
+        box-shadow:
+        0 0 2px aliceblue,
+        0 0 5px aliceblue,
+        0 0 13px aliceblue,
+        0 0 17px aliceblue;
+
     }
 
     .artists_button {
@@ -37,10 +51,25 @@
         background-color: transparent;
         backdrop-filter: blur(2px);
         border: 2px solid white;
-        font-size: 1rem;
+        border-radius: 0.7rem;
+        font-size: 1.5rem;
         padding: 0.6rem 1.5rem;
         margin-left: 0.5rem ;
         color: white;
+        transition: 0.1s ease-in-out;
+        cursor: pointer;
+    }
+
+    .artists_button:hover {
+        text-shadow: 0 0 2px aliceblue, 0 0 4px aliceblue, 0 0 10px aliceblue;
+
+        box-shadow:
+        0 0 2px aliceblue,
+        0 0 5px aliceblue,
+        0 0 9px aliceblue,
+        0 0 13px aliceblue,
+        0 0 17px aliceblue;
+
     }
 
     .Marquee {
@@ -49,5 +78,27 @@
         font-size: 2rem;
     }
 
+}
+
+@media only screen and (max-width: 680px){
+  .section_container {
+    
+
+    p {
+      font-size: 1rem;
+    }
+
+    .artists_button {
+      font-size: 1rem;
+    }
+    .ticket_button {
+      font-size: 1rem;
+    }
+
+    .Marquee {
+      font-size: 1.5rem;
+    }
+    
+  }
 }
 

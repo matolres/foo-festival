@@ -2,7 +2,7 @@ import { Orbitron } from 'next/font/google'
 import './globals.css'
 
 const orbitron = Orbitron({
-  weight: '400',
+  weight: 'variable',
   subsets: ['latin'],
 })
 
