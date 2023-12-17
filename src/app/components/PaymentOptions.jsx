@@ -117,7 +117,7 @@ import Countdown from 'react-countdown';
           
 
       
-     let subtotal = props.tickets*2397+props.twoPerTent*249+props.threePerTent*349;
+     let subtotal = props.tickets*props.ticketPris+props.twoPerTent*249+props.threePerTent*349;
     return(
         <>
         
@@ -190,7 +190,7 @@ import Countdown from 'react-countdown';
                     <div>
                         <p>Number of tickets:</p>
                         <p><span>{props.tickets}x</span> Foo fest</p>
-                        <p>Regular ticket</p>
+                        <p>{props.ticketType}</p>
 
                     </div>
                     <div>
