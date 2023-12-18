@@ -19,26 +19,30 @@
 
 .show{
     display: block;
-    width: 150px;
-    width: 3rem;
-            border: none;
-            text-decoration: none;
-            background-color: aliceblue;
-            border: none;
-            color: #711C91;
-            border-radius: 0.7rem;
-            font-size: 1rem;
-            padding: 0.3rem 0.6rem;
-            transition: 0.1s ease-in;
-            cursor: pointer;
+
+}
+.place_order{
+display: block;
+width: 150px;
+width: 3rem;
+        border: none;
+        text-decoration: none;
+        background-color: aliceblue;
+        border: none;
+        color: #711C91;
+        border-radius: 0.7rem;
+        font-size: 1rem;
+        padding: 0.3rem 0.6rem;
+        transition: 0.1s ease-in;
+        cursor: pointer;
 }
 
-.show:hover {
-    box-shadow:
-    0 0 2px #fff,
-    0 0 5px #fff,
-    0 0 13px #711C91,
-    0 0 17px #711C91,;
+.place_order:hover {
+box-shadow:
+0 0 2px #fff,
+0 0 5px #fff,
+0 0 13px #711C91,
+0 0 17px #711C91,;
 
 }
 

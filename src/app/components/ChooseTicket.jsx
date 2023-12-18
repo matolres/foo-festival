@@ -6,7 +6,7 @@ import title from "../components/styles/title.module.scss";
 
 export default function tickets(props){
     return(
-        <main >
+        <main className={styles.main}>
         
         <h1 className={title.glitch} data-text="Tickets">Tickets</h1>
         <section className={styles.section}>
