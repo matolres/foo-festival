@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Cards from 'react-credit-cards-2';
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
+import styles from './styles/Creditcard.module.scss'
 const PaymentForm = () => {
   const [state, setState] = useState({
     number: '',
@@ -21,7 +22,9 @@ const PaymentForm = () => {
   }
 
   return (
-    <div>
+    <>
+    
+    <div className={styles.wrapper}>
       <Cards
         number={state.number}
         expiry={state.expiry}
@@ -29,7 +32,8 @@ const PaymentForm = () => {
         name={state.name}
         focused={state.focus}
       />
-      <form>
+      <div className={styles.container}>
+      
         <input
           type="number"
           name="number"
@@ -62,11 +66,14 @@ const PaymentForm = () => {
           onChange={handleInputChange}
           onFocus={handleInputFocus}
         />
+      
         
         ...
-      </form>
-      {console.log(state)}
+      
+      
     </div>
+    </div>
+    </>
   );
 }
 

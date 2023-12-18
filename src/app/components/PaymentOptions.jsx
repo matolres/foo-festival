@@ -125,11 +125,11 @@ import Countdown from 'react-countdown';
         
         <form className={styles.pay_info_form} onSubmit={sendPostRequest}>
 
-        <div className={`${styles.paysection} ${isCardAdded ? styles.show : ''}`}>
+<div className={`${styles.paysection} ${isCardAdded ? styles.show : ''}`}>
 
 <div >
 <Creditcard/>
-<button type="button" onClick={()=>{setIsCardAdded(false)}} > submit</button>
+<button className={styles.cardbutton} type="button" onClick={()=>{setIsCardAdded(false)}} > submit</button>
 </div>
 </div>
           
