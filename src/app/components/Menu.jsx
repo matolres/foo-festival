@@ -1,6 +1,6 @@
 "use client";
 import styles from "./styles/Menu.module.scss";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import Link from "next/link";
 import { Turn as Hamburger } from 'hamburger-react'
 import Image from "next/image";
