@@ -12,9 +12,11 @@ import Link from 'next/link';
 export default function Home() {
 
   return (
+    <>
+    <Menu />
     <main className={styles.main}>
           <MyThree/>
-          <Menu />
+  
           <section className={styles.section_container}>
           <div className={styles.container}>
                 <h1 className={title.glitch} data-text="Foo Festival">Foo Festival</h1>
@@ -32,5 +34,6 @@ export default function Home() {
             </div>
           </section>
           </main>
+          </>
   )
 }

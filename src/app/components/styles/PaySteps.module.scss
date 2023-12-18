@@ -16,13 +16,15 @@
     .optiontoticket {
         
         display: flex;
+        padding-top: 8rem;
+        margin: 0 2rem ;
     }
     .paymentoption {
-        margin: 2rem;
         display: flex;
+        padding-top: 8rem;
     }
     .orderconfirmation {
-        margin: 2rem;
+        padding-top: 8rem;
         height: 60vh;
         align-self: center;
         display: flex;
@@ -51,12 +53,9 @@ $color-primary: #e21cc4;
         p {
             font-size: 0.8rem;
         }
-    .paymentoption {
-        margin: 2rem 0.5rem;
-
-        
-
-    }
+        .orderconfirmation {
+            margin: 0 1.5rem;
+        }
     
     .image {
         z-index: -10;

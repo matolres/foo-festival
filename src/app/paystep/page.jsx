@@ -60,6 +60,7 @@ const steps =[
 
    
     return(
+
         <main className={styles.main}>
             
             <div className={styles.image}>
@@ -70,9 +71,10 @@ const steps =[
                 alt="festival scene background"
                 />
             </div>
-        <Menu />
+            <Menu />
         {steps[currentStep].content}
         </main>
+
     )
 }
 
