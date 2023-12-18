@@ -7,7 +7,8 @@
     //height: 700px;
     // background-color: rgb(10 189 198 / 95%);
     background-color: #0fb5be;
-    position: fixed;
+    position: absolute;
+    
     top: 10%;
     left: 50%;
     transform: translate(-50%, 0);
@@ -16,6 +17,12 @@
     border-radius: 25px;
 
 }
+@media only screen and (max-width: 600px) {
+    .paysection{
+        top: 10px;
+    }
+}
+
 
 .show{
     display: block;
