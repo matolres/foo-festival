@@ -11,6 +11,27 @@
 }
 .show{
     display: block;
+    width: 150px;
+    width: 3rem;
+            border: none;
+            text-decoration: none;
+            background-color: aliceblue;
+            border: none;
+            color: #711C91;
+            border-radius: 0.7rem;
+            font-size: 1rem;
+            padding: 0.3rem 0.6rem;
+            transition: 0.1s ease-in;
+            cursor: pointer;
+}
+
+.show:hover {
+    box-shadow:
+    0 0 2px #fff,
+    0 0 5px #fff,
+    0 0 13px #711C91,
+    0 0 17px #711C91,;
+
 }
 
 .pay_info_form {
@@ -74,7 +95,7 @@
 
     .prisContainer{
         button {
-            width: 100px;
+            width: 200px;
             align-self: center;
         }
         .count { 
@@ -121,9 +142,33 @@
         font-size: 1.5rem;
         font-weight: 900;
     }
+    
+    }
+    .creditcard_button {
+            width: 3rem;
+            border: none;
+            text-decoration: none;
+            background-color: aliceblue;
+            border: none;
+            color: #711C91;
+            border-radius: 0.7rem;
+            font-size: 1rem;
+            padding: 0.3rem 0.6rem;
+            transition: 0.1s ease-in;
+            cursor: pointer;
+        }
+    
+        .creditcard_button:hover {
+            box-shadow:
+            0 0 2px #fff,
+            0 0 5px #fff,
+            0 0 13px #711C91,
+            0 0 17px #711C91,;
+    
+        }
 
     
-}
+
 
 @media only screen and (max-width: 1100px){
 

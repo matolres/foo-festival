@@ -137,15 +137,6 @@
 
 @media only screen and (max-width: 680px){
     .main {
-    /*.artists_container {
-        display: grid;
-        grid-template-columns: 1fr; 
-        grid-template-rows: repeat(1fr 1fr 0.5fr 1fr);
-        margin: 3rem 3rem;
-        padding-bottom: 3rem;
-        gap: 1rem;
-        height: 90%;
-}*/
 
 .artists_container {
     display: flex;
@@ -155,8 +146,9 @@
     
 }
 .artists_container > *:nth-child(3) {
-    //grid-area: 3/1/4/2;
-    font-size: 0.7rem;
+    span {
+    font-size: 1rem;
+    }
     height: 7rem; 
 }
 .artists_container > *:nth-child(4) {

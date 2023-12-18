@@ -7,6 +7,7 @@ import ChooseTicket from '../components/ChooseTicket';
 import Menu from "../components/Menu";
 import styles from "../components/styles/PaySteps.module.scss";
 import Image from 'next/image'
+import OrderConfirmation from "../components/OrderConfirmation";
 
 
 function PaySteps(){
@@ -45,6 +46,14 @@ const steps =[
         <PaymentOptions ticketType={ticketType} ticketPris={ticketPris} postId={postId} threePerTent={threePerTent} twoPerTent={twoPerTent} tickets={tickets} setCurrentStep={setCurrentStep}/>
     </div>
 
+},
+{
+    id:3,
+
+    content: <div className={styles.orderconfirmation}>
+        <OrderConfirmation />
+
+    </div>
 }
 ]
 

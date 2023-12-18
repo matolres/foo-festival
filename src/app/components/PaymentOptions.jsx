@@ -212,9 +212,9 @@ import Countdown from 'react-countdown';
                   
                  
             
-            <button onClick={payticket} type='button'>isert Card information</button>
+            <button className={styles.creditcard_button} onClick={payticket} type='button'>insert Card information</button>
             {/* <button >Place order</button>    */}
-            <button className={ showButton ? styles.show : styles.hide}  >Place order</button>
+            <button className={ showButton ? styles.show : styles.hide} onClick={()=> props.setCurrentStep(3)} >Place order</button>
                 </div>
             
         </div>
