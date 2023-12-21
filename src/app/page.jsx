@@ -22,7 +22,7 @@ export default function Home() {
                 <h1 className={title.glitch} data-text="Foo Festival">Foo Festival</h1>
                 <p>- EDM for the people- </p>
               <div>
-              <Link href='/paystep'><button className={styles.ticket_button}>TICKET</button></Link>
+              <Link href='/paystep'><button className={styles.ticket_button}>TICKETS</button></Link>
               <Link href='/artists'><button className={styles.artists_button}>ARTISTS</button></Link>
                 
               </div>
