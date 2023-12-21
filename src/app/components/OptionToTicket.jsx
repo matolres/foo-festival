@@ -17,7 +17,7 @@ const checkErrorFun = (event)=>{
     } else if (!camp) {
         setErrorDescription("You need to choose a camp")
     }else if(props.tickets > camp.getAttribute('data-available')){
-        setErrorDescription("spot is shit")
+        setErrorDescription("There is not enough available spots. Choose another camping spot. ")
     }else{
         props.setCamp(camp.value);
 
