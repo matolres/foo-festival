@@ -120,7 +120,7 @@ return(
 
             </div>
             <p className={styles.error}>{errorDescription}</p>
-            <button className={styles.valg}>Gem valg</button>
+            <button className={styles.valg}>Continue</button>
         </form>
     </div>
     
