@@ -125,8 +125,8 @@ function Points() {
       <sphereGeometry args={[1, 84, 84]} />
       <meshBasicMaterial color="#eeb2ff" side={THREE.BackSide}>
       <GradientTexture
-        stops={[0, 1]} // As many stops as you want
-        colors={['#290845',"#021b26"]} // Colors need to match the number of stops
+        stops={[0, 0.3,0.6, 1]} // As many stops as you want
+        colors={['#290845',"#021b26", "#29414d","#370c4a"]} // Colors need to match the number of stops
         size={200} // Size is optional, default = 1024
        />
       </meshBasicMaterial>

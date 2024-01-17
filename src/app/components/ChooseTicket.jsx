@@ -1,6 +1,4 @@
-import Link from "next/link";
-import MyThree from "./Background";
-import Menu from "./Menu";
+
 import styles from "../components/styles/Tickets.module.scss";
 import title from "../components/styles/title.module.scss";
 

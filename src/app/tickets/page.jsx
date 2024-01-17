@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Points from "../components/Background";
 import Menu from "../components/Menu";
 import styles from "../components/styles/Tickets.module.scss";
 import title from "../components/styles/title.module.scss";
@@ -7,7 +6,6 @@ import title from "../components/styles/title.module.scss";
 export default function tickets(){
     return(
         <main className={styles.main}>
-        <Points/>
         <Menu />
         <h1 className={title.glitch} data-text="Tickets">Tickets</h1>
         <section className={styles.section}>

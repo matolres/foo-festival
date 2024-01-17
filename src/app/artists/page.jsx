@@ -1,6 +1,4 @@
 "use client";
-
-import MyThree from '../components/Background'
 import styles from "../components/styles/Artists.module.scss"
 import title from "../components/styles/title.module.scss"
 import Menu from "../components/Menu"
@@ -33,7 +31,6 @@ export default function Artists(){
 
     return(
         <main className={styles.main}>
-            <MyThree />
             <Menu/>
             <h1 className={title.glitch} data-text="Daily Lineup">Daily Lineup</h1>
             <section className={styles.artists_container}>
