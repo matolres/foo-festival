@@ -1,3 +1,5 @@
+"use client";
+
 import Points from './components/Background';
 import styles from "../app/components/styles/LandingPage.module.scss"
 import title from "../app/components/styles/title.module.scss"
@@ -7,11 +9,12 @@ import Marquee from "react-fast-marquee";
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 export default function Home() {
 
   return (
     <>
+    <SpeedInsights/>
     <Canvas className={background.anim}>
        <directionalLight
                 color={"white"} // Set the color of the light
