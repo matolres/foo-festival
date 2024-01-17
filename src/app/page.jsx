@@ -1,5 +1,3 @@
-"use client"
-
 import Points from './components/Background';
 import styles from "../app/components/styles/LandingPage.module.scss"
 import title from "../app/components/styles/title.module.scss"

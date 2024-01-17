@@ -1,5 +1,4 @@
-"use client"
-
+"use client";
 import { useState } from 'react';
 import OptionToTicket from '../components/OptionToTicket';
 import PaymentOptions from '../components/PaymentOptions';
