@@ -1,268 +1,145 @@
 "use client";
-import * as THREE from 'three';
-import { useEffect, useRef } from "react"; 
-import styles from "./styles/Background.module.scss"
 
-function MyThree() {
-  const refContainer = useRef(null);
-  let group;
-const particlesData = [];
-let camera, scene, renderer;
-let positions, colors;
-let particles;
-let pointCloud;
-let particlePositions;
-let linesMesh;
-let targetX = 0;
-let targetY = 0;
-
-const maxParticleCount = 350;
-let particleCount = 350;
-const r = 450;
-const rLong = 800;
-const rHalf = r / 2;
-
-const effectController = {
-  showLines: true,
-  minDistance: 130,
-  maxConnections: 5,
-};
-
-useEffect(() => {
-  init();
-  window.addEventListener("resize", onWindowResize);
-  window.addEventListener("mousemove", handleMouseMove);
-
-  refContainer.current.appendChild(renderer.domElement);
-
-
-  animate();
-
-  return () => {
-    window.removeEventListener("resize", onWindowResize);
-    window.removeEventListener("mousemove", handleMouseMove);
-  };
-
-},);
-
-function init() {
-  camera = new THREE.PerspectiveCamera(
-    20,
-    window.innerWidth / window.innerHeight,
-    1,
-    4000
-  );
-  camera.position.z = 1350;
-
-  scene = new THREE.Scene();
-  group = new THREE.Group();
-  scene.add(group);
+import { Environment, OrbitControls, PerspectiveCamera, GradientTexture, Stats } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import {  useMemo, useRef} from "react";
+import * as THREE from "three" ;
 
 
 
 
-  const segments = maxParticleCount * maxParticleCount;
+function Points() {
+        // Particle system
+        const particlesRef = useRef();
+        const linesRef = useRef();
+        const particleCount = 230;
+        const particleSpeed = 0.001;
+        const directionChangeSpeed = 0.01;
+        const maxDistance = 0.3;
 
-  positions = new Float32Array(segments * 3);
-  colors = new Float32Array(segments * 3);
 
-  const pMaterial = new THREE.PointsMaterial({
-    color: 0xffffff,
-    blending: THREE.AdditiveBlending,
-    transparent: true,
-    sizeAttenuation: true,
-  });
 
-  particles = new THREE.BufferGeometry();
-  particlePositions = new Float32Array(maxParticleCount * 3);
 
-  for (let i = 0; i < maxParticleCount; i++) {
-    const x = Math.random() * r - r / 2;
-    const y = Math.random() * rLong - rLong / 2;
-    const z = Math.random() *  r / 2;
+        // Initial positions and directions
+        const { particlesGeometry, initialDirections } = useMemo(() => {
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3); // 3 værdier pr. partikel (x, y, z)
+            const directions = new Array(particleCount).fill().map(() => new THREE.Vector3(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5));
+            
+            for (let i = 0; i < particleCount; i++) {
+                let ix = i * 3;
+                positions[ix] = Math.random() * 1 - 0.5; // x-akse, bredde
+                positions[ix + 1] = Math.random() * 2.3 - 1.5; // y-akse, højde
+                positions[ix + 2] = Math.random() * 1 - 0.5; // z-akse
+            }
+            
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            return { particlesGeometry: geometry, initialDirections: directions };
+        }, []);
 
-    particlePositions[i * 3] = x;
-    particlePositions[i * 3 + 1] = y;
-    particlePositions[i * 3 + 2] = z;
 
-    // add it to the geometry
-    particlesData.push({
-      velocity: new THREE.Vector3(
-        -0.5 + Math.random() * 0.5,
-        -0.5 + Math.random() * 0.5,
-        -0.5 + Math.random() * 0.5 
-      ),
-      numConnections: 0,
-    });
-  }
+    // Create an array to hold line positions
+    const [lineGeometry] = useMemo(() => {
+        const geometry = new THREE.BufferGeometry();
+        const maxLines = particleCount * (particleCount - 1) / 2; // Maximum possible lines
+        const positions = new Float32Array(maxLines * 3 * 2); // 2 vertices per line, 3 coordinates each
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        return [geometry];
+    }, []);
 
-  particles.setDrawRange(0, particleCount);
-  particles.setAttribute(
-    "position",
-    new THREE.BufferAttribute(particlePositions, 3).setUsage(
-      THREE.DynamicDrawUsage
+
+
+    
+        useFrame(() => {
+            const positions = particlesRef.current.geometry.attributes.position.array;
+            const linePositions = linesRef.current.geometry.attributes.position.array;
+            const directions = initialDirections;
+
+
+            for (let i = 0; i < particleCount; i++) {
+                let idx = i * 3;
+                for (let j = 0; j < 3; j++) {
+                    // Update positions according to direction
+                    positions[idx + j] += directions[i].getComponent(j) * particleSpeed;
+    
+                    // Change direction slightly
+                    directions[i].setComponent(j, directions[i].getComponent(j) + (Math.random() - 0.5) * directionChangeSpeed);
+    
+                    // Keep particles inside the box
+                    if (Math.abs(positions[idx + j]) > 0.5) {
+                        directions[i].setComponent(j, -directions[i].getComponent(j));
+                    }
+                }
+            }
+
+            let lineIdx = 0;
+        for (let i = 0; i < particleCount - 1; i++) {
+            for (let j = i + 1; j < particleCount; j++) {
+                const dx = positions[i * 3] - positions[j * 3];
+                const dy = positions[i * 3 + 1] - positions[j * 3 + 1];
+                const dz = positions[i * 3 + 2] - positions[j * 3 + 2];
+                const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+                if (dist < maxDistance) {
+                    linePositions[lineIdx++] = positions[i * 3];
+                    linePositions[lineIdx++] = positions[i * 3 + 1];
+                    linePositions[lineIdx++] = positions[i * 3 + 2];
+
+                    linePositions[lineIdx++] = positions[j * 3];
+                    linePositions[lineIdx++] = positions[j * 3 + 1];
+                    linePositions[lineIdx++] = positions[j * 3 + 2];
+                }
+            }
+        }
+
+            linesRef.current.geometry.setDrawRange(0, lineIdx / 3);
+            linesRef.current.geometry.attributes.position.needsUpdate = true;
+            particlesRef.current.geometry.attributes.position.needsUpdate = true;
+
+
+        });
+     
+ 
+
+    return (
+      < >
+      
+      <PerspectiveCamera makeDefault position={[0, 0, 1.7]} />
+      <OrbitControls autoRotate autoRotateSpeed={0.6}/>
+      <Stats />
+
+    
+
+      <points ref={particlesRef} geometry={particlesGeometry}  >
+                <pointsMaterial size={0} color="white" transparent opacity={0.5} sizeAttenuation/>
+      </points>
+      <lineSegments ref={linesRef} side={THREE.BackSide} geometry={lineGeometry}>
+      <lineBasicMaterial color="#0ABDC6" transparent opacity={0.5}/>
+      </lineSegments> 
+      
+
+      
+      <Environment background>
+      
+      <mesh  scale={100} rotation={[0, 0, Math.PI / 2]}>
+      <sphereGeometry args={[1, 84, 84]} />
+      <meshBasicMaterial color="#eeb2ff" side={THREE.BackSide}>
+      <GradientTexture
+        stops={[0, 1]} // As many stops as you want
+        colors={['#290845',"#021b26"]} // Colors need to match the number of stops
+        size={200} // Size is optional, default = 1024
+       />
+      </meshBasicMaterial>
+
+      </mesh>
+    </Environment>
+      
+      
+      </>
     )
-  );
-
-  // create the particle system
-  pointCloud = new THREE.Points(particles, pMaterial);
-  group.add(pointCloud);
-
-  const geometry = new THREE.BufferGeometry();
-
-  geometry.setAttribute(
-    "position",
-    new THREE.BufferAttribute(positions, 3).setUsage(THREE.DynamicDrawUsage)
-  );
-  geometry.setAttribute(
-    "color",
-    new THREE.BufferAttribute(colors, 3).setUsage(THREE.DynamicDrawUsage)
-  );
-
-  geometry.computeBoundingSphere();
-
-  geometry.setDrawRange(0, 0);
-
-  const material = new THREE.LineBasicMaterial({
-    vertexColors: true,
-    blending: THREE.AdditiveBlending,
-    transparent: true,
-    opacity: 0.5,
-    color: 0x0abdc6,
-  });
-
-  linesMesh = new THREE.LineSegments(geometry, material);
-  group.add(linesMesh);
-
-  //
-
-  renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth, window.innerHeight);
-
-  //
-
-
-  window.addEventListener("resize", onWindowResize);
 }
 
 
-function animate() {
-  let vertexpos = 0;
-  let colorpos = 0;
-  let numConnected = 0;
-
-  for (let i = 0; i < particleCount; i++) particlesData[i].numConnections = 0;
-
-  for (let i = 0; i < particleCount; i++) {
-    // get the particle
-    const particleData = particlesData[i];
-
-    particlePositions[i * 3 ] += particleData.velocity.x;
-    particlePositions[i * 3 + 1] += particleData.velocity.y;
-    particlePositions[i * 3 + 2] += particleData.velocity.z;
-
-    if (
-      particlePositions[i * 3 + 1] < -rHalf ||
-      particlePositions[i * 3 + 1] > rHalf
-    )
-      particleData.velocity.y = -particleData.velocity.y;
-
-    if (particlePositions[i * 3] < -rHalf || particlePositions[i * 3] > rHalf)
-      particleData.velocity.x = -particleData.velocity.x;
-
-    if (
-      particlePositions[i * 3 + 2] < -rHalf ||
-      particlePositions[i * 3 + 2] > rHalf
-    )
-      particleData.velocity.z = -particleData.velocity.z;
-
-    if (
-      effectController.limitConnections &&
-      particleData.numConnections >= effectController.maxConnections
-    )
-      continue;
-
-    // Check collision
-    for (let j = i + 1; j < particleCount; j++) {
-      const particleDataB = particlesData[j];
-      if (
-        effectController.limitConnections &&
-        particleDataB.numConnections >= effectController.maxConnections
-      )
-        continue;
-
-      const dx = particlePositions[i * 3] - particlePositions[j * 3];
-      const dy = particlePositions[i * 3 + 1] - particlePositions[j * 3 + 1];
-      const dz = particlePositions[i * 3 + 2] - particlePositions[j * 3 + 2];
-      const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-      if (dist < effectController.minDistance) {
-        particleData.numConnections++;
-        particleDataB.numConnections++;
-
-        const alpha = 1.0 - dist / effectController.minDistance;
-
-        positions[vertexpos++] = particlePositions[i * 3];
-        positions[vertexpos++] = particlePositions[i * 3 + 1];
-        positions[vertexpos++] = particlePositions[i * 3 + 2];
-
-        positions[vertexpos++] = particlePositions[j * 3];
-        positions[vertexpos++] = particlePositions[j * 3 + 1];
-        positions[vertexpos++] = particlePositions[j * 3 + 2];
-
-        colors[colorpos++] = alpha;
-        colors[colorpos++] = alpha;
-        colors[colorpos++] = alpha;
-
-        colors[colorpos++] = alpha;
-        colors[colorpos++] = alpha;
-        colors[colorpos++] = alpha;
-
-        numConnected++;
-      }
-    }
-  }
-
-  linesMesh.geometry.setDrawRange(0, numConnected * 2);
-  linesMesh.geometry.attributes.position.needsUpdate = true;
-  linesMesh.geometry.attributes.color.needsUpdate = true;
-
-  pointCloud.geometry.attributes.position.needsUpdate = true;
-
-  requestAnimationFrame(animate);
-
-  render();
-  
-}
-
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-}
-
-function handleMouseMove(event) {
-  targetX = event.clientX * 0.0010;
-  targetY = event.clientY * 0.0010;
-}
-
-function render() {
-  // Use lerp to smoothly transition from the current rotation to the target rotation
-  group.rotation.y += (targetX - group.rotation.y) * 0.020;
-  group.rotation.x += (targetY - group.rotation.x) * 0.020;
-
-  renderer.setSize(window.innerWidth, window.innerHeight);
-
-  renderer.render(scene, camera);
-}
-
-  return (
-    <div ref={refContainer} className={styles.anim}></div>
-
-  );
-}
+export default Points;
 
 
-
-export default MyThree;

@@ -140,21 +140,21 @@ import Countdown from 'react-countdown';
         
             <div>
               
-                <input type="text" id="fname" name="fname" placeholder='Firstname' />
-                <input type="text" id="lname" name="lname" placeholder='Lastname' />
+                <input type="text" id="fname" name="fname" placeholder='Firstname' required />
+                <input type="text" id="lname" name="lname" placeholder='Lastname' required />
             </div>
             <div>
-                <input type="text" id="adress" name="adress" placeholder='Adress' />
+                <input type="text" id="adress" name="adress" placeholder='Adress' required />
             </div>
             <div>
-                <input type="text" id="Country" name="country" placeholder='Country' />
-                <input type="text" id="city" name="city" placeholder='City' />
+                <input type="text" id="Country" name="country" placeholder='Country' required />
+                <input type="text" id="city" name="city" placeholder='City' required/>
             </div>
             <div>
-                <input type="email" id="email" name="email" placeholder='Email' />
+                <input type="email" id="email" name="email" placeholder='Email' required />
             </div>
             <div>
-                <input type="tel" id="tel" name="tel" placeholder='Phone number' />
+                <input type="tel" id="tel" name="tel" placeholder='Phone number' required />
             </div>
             <br />
             <hr />

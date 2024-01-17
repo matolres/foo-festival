@@ -1,21 +1,33 @@
-// import Image from 'next/image'
-// import styles from './page.module.css'
+"use client"
 
-
-import MyThree from './components/Background';
+import Points from './components/Background';
 import styles from "../app/components/styles/LandingPage.module.scss"
 import title from "../app/components/styles/title.module.scss"
+import background from "../app/components/styles/Background.module.scss"
 import Menu from "./components/Menu";
 import Marquee from "react-fast-marquee";
 import Link from 'next/link';
+import { Suspense } from 'react';
+import { Canvas } from '@react-three/fiber';
 
 export default function Home() {
 
   return (
     <>
-    <Menu />
+    <Canvas className={background.anim}>
+       <directionalLight
+                color={"white"} // Set the color of the light
+                intensity={3}   // Set the intensity of the light
+                position={[5, 3, 0]} // Position of the light
+                // The direction is implied by the position
+            />
+      <Suspense fallback={null}>
+      <Points />
+      </Suspense>
+    </Canvas>
+    
     <main className={styles.main}>
-          <MyThree/>
+    <Menu />
   
           <section className={styles.section_container}>
           <div className={styles.container}>

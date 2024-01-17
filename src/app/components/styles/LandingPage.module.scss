@@ -3,6 +3,10 @@
   height: 100%;
   overflow: hidden;
   padding-top: 6rem;
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 .section_container {
     display: grid;
